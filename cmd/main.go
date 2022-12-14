@@ -32,29 +32,21 @@ type ShootingStats struct {
 	np        string `json:"np:G-xG"`
 }
 
-type PassingStats struct {
-}
+type PassingStats struct{}
 
-type PassTypesStats struct {
-}
+type PassTypesStats struct{}
 
-type GoalShotCreationStats struct {
-}
+type GoalShotCreationStats struct{}
 
-type DefenseStats struct {
-}
+type DefenseStats struct{}
 
-type PossessionStats struct {
-}
+type PossessionStats struct{}
 
-type PlayingTimeStats struct {
-}
+type PlayingTimeStats struct{}
 
-type MiscellaneousStats struct {
-}
+type MiscellaneousStats struct{}
 
-type PlayerSummaryStats struct {
-}
+type PlayerSummaryStats struct{}
 
 type GoalKeepingStats struct {
 	goalAgainst                 string `json:"goal_against"`
@@ -66,30 +58,35 @@ type GoalKeepingStats struct {
 	postShotxGSot               string `json:"ps_xG_SoT"`
 	postShotxGMinusGlsAllowed   string `json:"ps_xG_minus_gls_allowed"`
 	postShotxGMinusGlsAllowedFt string `json:"ps_xG_minus_gls_allowed_ft"`
+
 	// launched more than 40yards
 	launchedPassesCompletedLonger string `json:"passes_cmp_longer"`
 	launchedPassesAttemptedLonger string `json:"passes_att_longer"`
 	launchedPassesCompletedPer    string `json:"passes_cmp_per"`
+
 	// passes not including goal kick
 	passesAttempted string `json:"passes_att"`
 	throwsAttempted string `json:"thr_att"`
 	launchPer       string `json:"launch_per"`
 	averageLen      string `json:"avg_len"`
-	//goal kicks
+
+	// goal kicks
 	gkAttempted  string `json:"gk_att"`
 	gkLaunchPer  string `json:"gk_launch_per"`
 	gkAverageLen string `json:"gk_avg_len"`
-	//Crosses
+
+	// Crosses
 	opponentAttemptedCrosses string `json:"crosses_opp"`
 	crossesStopedByKeeper    string `json:"crosses_stp_by_keeper"`
 	crossesStopedByKeeperPer string `json:"crosses_stp_by_keeper_per"`
+
 	// sweeper
 	nDefensiveActionsByKeeper   string `json:"n_defense_actions_by_keeper"`
 	nDefensiveActionsByKeeperFt string `json:"n_defense_actions_by_keeper_ft"`
 	averageDistance             string `json:"average_distance"`
 }
 
-//TODO: maybe create a interface for a player, to solve the problem where i need to get the stats from diff tables
+// TODO: maybe create a interface for a player, to solve the problem where i need to get the stats from diff tables
 // TODO: create a struct to handle all players statistics
 type Player struct {
 	name             string                `json:"name"`
@@ -112,7 +109,6 @@ type Player struct {
 // TODO: Accept all teams stastistics and players by id and name ?
 
 func main() {
-
 	c := colly.NewCollector(
 		colly.AllowedDomains("fbref.com"),
 	)
@@ -180,5 +176,4 @@ func main() {
 	})
 
 	c.Visit("https://fbref.com/en/squads/84d9701c/2022/all_comps/Fluminense-Stats-All-Competitions")
-
 }
