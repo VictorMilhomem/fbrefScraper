@@ -45,6 +45,42 @@ type ShootingStats struct {
 	np string `json:"np:G-xG"`
 }
 
+type PassingStats struct {
+
+}
+
+type PassTypesStats struct {
+
+}
+
+type GoalShotCreationStats struct {
+
+}
+
+type DefenseStats struct {
+
+}
+
+type PossessionStats struct {
+
+}
+
+type PlayingTimeStats struct {
+
+}
+
+type MiscellaneousStats struct {
+
+}
+
+type PlayerSummaryStats struct {
+
+}
+
+type GoalKeepingStats struct {
+
+}
+
 // TODO: create a struct to handle all players statistics
 type Player struct {
     name string `json:"name"`
@@ -53,6 +89,16 @@ type Player struct {
     age string `json:"age"`
     min string `json:"minutes_played"`
 	shooting ShootingStats `json: "shooting_stats"`    
+    passing PassingStats `json:"passing_stats"`
+    passType PassTypesStats `json:"passing_types"`
+    goalShotCreation GoalShotCreationStats `json:"goal_shot_creation"`
+    defenseActions DefenseStats `json:"defense_actions"`
+    possession PossessionStats `json:"possession"`
+    playingTime PlayingTimeStats `json:"playing_time"`
+    miscellaneous MiscellaneousStats `json:"miscellaneous"`
+    playerSummary PlayerSummaryStats `json:"player_summary"`
+    goalkeeping GoalKeepingStats `json:"goalkeeping"`
+
 }
 
 // TODO: Accept all teams stastistics and players by id and name ? 
@@ -88,7 +134,8 @@ func main() {
 	c.OnError(func(r *colly.Response, err error) {
 		log.Println(colors.Red, "Request URL:", colors.Reset,r.Request.URL, "failed with response:", r, colors.Red, "\nError:", err,colors.Reset)
 	})
-    
+   
+    // TODO: getting the struct field infos from each respective table
     var players []Player
     c.OnHTML("table#stats_shooting_combined > tbody", func(h *colly.HTMLElement) {
         h.ForEach("tr", func(i int, el *colly.HTMLElement) {
