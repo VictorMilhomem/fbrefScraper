@@ -10,7 +10,8 @@ import (
 	"github.com/gocolly/colly"
 )
 
-// TODO: url for custom time "https://fbref.com/en/squads/ID/YEAR/all_comps/TEAMNAME-Stats-All-Competitions"
+// TODO: url for custom teams "https://fbref.com/en/squads/ID/YEAR/all_comps/TEAMNAME-Stats-All-Competitions"
+// TODO: maybe url for get comp tables
 
 type ShootingStats struct {
 	gls       string `json:"gols"`
@@ -56,8 +57,39 @@ type PlayerSummaryStats struct {
 }
 
 type GoalKeepingStats struct {
+	goalAgainst                 string `json:"goal_against"`
+	penaltyKickAllowed          string `json:"pk_allowed"`
+	freeKickAllowed             string `json:"fk_allowed"`
+	cornerGoalsAgainst          string `json:"ck_allowed"`
+	ownGoals                    string `json:"own_goals"`
+	postShotxG                  string `json:"ps_xG"`
+	postShotxGSot               string `json:"ps_xG_SoT"`
+	postShotxGMinusGlsAllowed   string `json:"ps_xG_minus_gls_allowed"`
+	postShotxGMinusGlsAllowedFt string `json:"ps_xG_minus_gls_allowed_ft"`
+	// launched more than 40yards
+	launchedPassesCompletedLonger string `json:"passes_cmp_longer"`
+	launchedPassesAttemptedLonger string `json:"passes_att_longer"`
+	launchedPassesCompletedPer    string `json:"passes_cmp_per"`
+	// passes not including goal kick
+	passesAttempted string `json:"passes_att"`
+	throwsAttempted string `json:"thr_att"`
+	launchPer       string `json:"launch_per"`
+	averageLen      string `json:"avg_len"`
+	//goal kicks
+	gkAttempted  string `json:"gk_att"`
+	gkLaunchPer  string `json:"gk_launch_per"`
+	gkAverageLen string `json:"gk_avg_len"`
+	//Crosses
+	opponentAttemptedCrosses string `json:"crosses_opp"`
+	crossesStopedByKeeper    string `json:"crosses_stp_by_keeper"`
+	crossesStopedByKeeperPer string `json:"crosses_stp_by_keeper_per"`
+	// sweeper
+	nDefensiveActionsByKeeper   string `json:"n_defense_actions_by_keeper"`
+	nDefensiveActionsByKeeperFt string `json:"n_defense_actions_by_keeper_ft"`
+	averageDistance             string `json:"average_distance"`
 }
 
+//TODO: maybe create a interface for a player, to solve the problem where i need to get the stats from diff tables
 // TODO: create a struct to handle all players statistics
 type Player struct {
 	name             string                `json:"name"`
