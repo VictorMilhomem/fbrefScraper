@@ -91,7 +91,7 @@ type Player struct {
 	Age    string `json:"age"`
 	Min    string `json:"minutes_played_per90"`
 
-	Shooting         ShootingStats         `json: "shooting_stats"`
+	Shooting         ShootingStats         `json:"shooting_stats"`
 	Passing          PassingStats          `json:"passing_stats"`
 	PassType         PassTypesStats        `json:"passing_types"`
 	GoalShotCreation GoalShotCreationStats `json:"goal_shot_creation"`
