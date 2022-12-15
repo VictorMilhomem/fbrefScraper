@@ -2,10 +2,8 @@ package core
 
 import (
 	"encoding/json"
-	"log"
 	"os"
 
-	"github.com/VictorMilhomem/fbreScraper/cmd/colors"
 	"github.com/VictorMilhomem/fbreScraper/cmd/types"
 	"github.com/gocolly/colly"
 )
@@ -13,18 +11,6 @@ import (
 var players []types.Player
 
 func ScrapePlayers(url string, c *colly.Collector) {
-	c.OnRequest(func(r *colly.Request) {
-		log.Println(colors.Cyan, "Scraping:", r.URL, colors.Reset)
-	})
-
-	c.OnResponse(func(r *colly.Response) {
-		log.Println(colors.Green, "Status:", r.StatusCode, colors.Reset)
-	})
-
-	c.OnError(func(r *colly.Response, err error) {
-		log.Println(colors.Red, "Request URL:", colors.Reset, r.Request.URL, "failed with response:", r, colors.Red, "\nError:", err, colors.Reset)
-	})
-
 	// TODO: getting the struct field infos from each respective table
 	var (
 		playerInfo    types.PlayerBasic
