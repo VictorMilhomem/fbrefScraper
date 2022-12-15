@@ -6,7 +6,7 @@ a json file.
 
 
 # TODO
-[] Players and statistics structures
-[] Teams and statistics structures
-[] Server to Json Api
+[ ] Players and statistics structures
+[ ] Teams and statistics structures
+[ ] Server to Json Api
 
