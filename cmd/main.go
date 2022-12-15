@@ -1,9 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/VictorMilhomem/fbreScraper/cmd/colors"
@@ -17,7 +19,7 @@ var playerInfo types.PlayerBasic
 
 var (
 	shootingStats types.ShootingStats
-	player        types.Player
+	player        *types.Player
 )
 
 // TODO: Accept all teams stastistics and players by id and name ?
@@ -59,41 +61,45 @@ func main() {
 		h.ForEach("tr", func(i int, el *colly.HTMLElement) {
 			playerInfo = types.PlayerBasic{
 				Name:   el.ChildText("th"),
-				Nation: el.ChildText("td:nth-child(1)"),
-				Pos:    el.ChildText("td:nth-child(2)"),
-				Age:    el.ChildText("td:nth-child(3)"),
-				Min:    el.ChildText("td:nth-child(4)"),
+				Nation: el.ChildText("td:nth-child(2)"),
+				Pos:    el.ChildText("td:nth-child(3)"),
+				Age:    el.ChildText("td:nth-child(4)"),
+				Min:    el.ChildText("td:nth-child(5)"),
 			}
 
 			shootingStats = types.ShootingStats{
-				Gls:       el.ChildText("td:nth-child(5)"),
-				Sht:       el.ChildText("td:nth-child(6)"),
-				Sot:       el.ChildText("td:nth-child(7)"),
-				Sot_per:   el.ChildText("td:nth-child(8)"),
-				Sht_ft:    el.ChildText("td:nth-child(9)"),
-				Sot_ft:    el.ChildText("td:nth-child(10)"),
-				Gls_shot:  el.ChildText("td:nth-child(11)"),
-				Dist:      el.ChildText("td:nth-child(12)"),
-				Fk:        el.ChildText("td:nth-child(13)"),
-				Pk:        el.ChildText("td:nth-child(14)"),
-				PkAtt:     el.ChildText("td:nth-child(15)"),
-				Xg:        el.ChildText("td:nth-child(16)"),
-				Npxg:      el.ChildText("td:nth-child(17)"),
-				Npxg_shot: el.ChildText("td:nth-child(18)"),
-				Gls_xg:    el.ChildText("td:nth-child(19)"),
-				Np:        el.ChildText("td:nth-child(20)"),
+				Gls:         el.ChildText("td:nth-child(6)"),
+				Sht:         el.ChildText("td:nth-child(7)"),
+				Sot:         el.ChildText("td:nth-child(8)"),
+				Sot_per:     el.ChildText("td:nth-child(9)"),
+				Sht_ft:      el.ChildText("td:nth-child(10)"),
+				Sot_ft:      el.ChildText("td:nth-child(11)"),
+				Gls_shot:    el.ChildText("td:nth-child(12)"),
+				Gls_per_sot: el.ChildText("td:nth-child(13)"),
+				Dist:        el.ChildText("td:nth-child(14)"),
+				Fk:          el.ChildText("td:nth-child(15)"),
+				Pk:          el.ChildText("td:nth-child(16)"),
+				PkAtt:       el.ChildText("td:nth-child(17)"),
+				Xg:          el.ChildText("td:nth-child(18)"),
+				Npxg:        el.ChildText("td:nth-child(19)"),
+				Npxg_shot:   el.ChildText("td:nth-child(20)"),
+				Gls_xg:      el.ChildText("td:nth-child(21)"),
+				Np:          el.ChildText("td:nth-child(22)"),
 			}
-			// p, err := json.Marshal(player)
-			// if err != nil {
-			//     log.Fatal(err)
-			// }
-			player = types.Player{
-				PlayerBasicInfo: playerInfo,
-				Shooting:        shootingStats,
-			}
-			players = append(players, player)
-			log.Println(players)
+
+			//player = types.Player{
+			//	PlayerBasicInfo: playerInfo,
+			//	Shooting:        shootingStats,
+			//}
+			player = types.NewPlayer(playerInfo)
+			player.AppendShooting(shootingStats)
+			players = append(players, *player)
 		})
+	})
+
+	c.OnScraped(func(r *colly.Response) {
+		enc := json.NewEncoder(os.Stdout)
+		enc.Encode(players[1])
 	})
 
 	c.Visit("https://fbref.com/en/squads/84d9701c/2022/all_comps/Fluminense-Stats-All-Competitions")

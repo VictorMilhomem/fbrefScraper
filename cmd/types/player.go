@@ -1,22 +1,23 @@
 package types
 
 type ShootingStats struct {
-	Gls       string `json:"gols"`
-	Sht       string `json:"total_shots"`
-	Sot       string `json:"shots_on_target"`
-	Sot_per   string `json:"shots_on_target_per"`
-	Sht_ft    string `json:"shots_fulltime"`
-	Sot_ft    string `json:"shots_on_target_fulltime"`
-	Gls_shot  string `json:"gols_per_shot"`
-	Dist      string `json:"distance"`
-	Fk        string `json:"free_kick"`
-	Pk        string `json:"penalty_kick"`
-	PkAtt     string `json:"penalty_kick_attempted"`
-	Xg        string `json:"xG"`
-	Npxg      string `json:"npxG"`
-	Npxg_shot string `json:"npxG_shot"`
-	Gls_xg    string `json:"G-xG"`
-	Np        string `json:"np:G-xG"`
+	Gls         string `json:"gols"`
+	Sht         string `json:"total_shots"`
+	Sot         string `json:"shots_on_target"`
+	Sot_per     string `json:"shots_on_target_per"`
+	Sht_ft      string `json:"shots_fulltime"`
+	Sot_ft      string `json:"shots_on_target_fulltime"`
+	Gls_shot    string `json:"gols_per_shot"`
+	Gls_per_sot string `json:"gols_per_SoT"`
+	Dist        string `json:"distance"`
+	Fk          string `json:"free_kick"`
+	Pk          string `json:"penalty_kick"`
+	PkAtt       string `json:"penalty_kick_attempted"`
+	Xg          string `json:"xG"`
+	Npxg        string `json:"npxG"`
+	Npxg_shot   string `json:"npxG_shot"`
+	Gls_xg      string `json:"G-xG"`
+	Np          string `json:"np:G-xG"`
 }
 
 type PassingStats struct{}
@@ -76,15 +77,20 @@ type GoalKeepingStats struct {
 // TODO: maybe create a interface for a player, to solve the problem where i need to get the stats from diff tables
 // TODO: create a struct to handle all players statistics
 type PlayerBasic struct {
+	Name   string
+	Nation string
+	Pos    string
+	Age    string
+	Min    string
+}
+
+type Player struct {
 	Name   string `json:"name"`
 	Nation string `json:"nation"`
 	Pos    string `json:"position"`
 	Age    string `json:"age"`
-	Min    string `json:"minutes_played"`
-}
+	Min    string `json:"matches_played"`
 
-type Player struct {
-	PlayerBasicInfo  PlayerBasic
 	Shooting         ShootingStats         `json: "shooting_stats"`
 	Passing          PassingStats          `json:"passing_stats"`
 	PassType         PassTypesStats        `json:"passing_types"`
@@ -95,4 +101,22 @@ type Player struct {
 	Miscellaneous    MiscellaneousStats    `json:"miscellaneous"`
 	PlayerSummary    PlayerSummaryStats    `json:"player_summary"`
 	Goalkeeping      GoalKeepingStats      `json:"goalkeeping"`
+}
+
+func NewPlayer(info PlayerBasic) *Player {
+	return &Player{
+		Name:   info.Name,
+		Nation: info.Nation,
+		Pos:    info.Pos,
+		Age:    info.Age,
+		Min:    info.Min,
+	}
+}
+
+func (p *Player) AppendShooting(st ShootingStats) {
+	p.Shooting = st
+}
+
+func (p *Player) AppendGoalKeeping(gk GoalKeepingStats) {
+	p.Goalkeeping = gk
 }
