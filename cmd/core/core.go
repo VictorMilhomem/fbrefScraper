@@ -2,6 +2,7 @@ package core
 
 import (
 	"encoding/json"
+	"log"
 	"os"
 
 	"github.com/VictorMilhomem/fbreScraper/cmd/types"
@@ -10,8 +11,9 @@ import (
 
 var players []types.Player
 
-func ScrapePlayers(url string, c *colly.Collector) {
-	// TODO: getting the struct field infos from each respective table
+// TODO: create functions to get all players statistics
+
+func getPlayersShootingStats(c *colly.Collector) error {
 	var (
 		playerInfo    types.PlayerBasic
 		shootingStats types.ShootingStats
@@ -48,10 +50,6 @@ func ScrapePlayers(url string, c *colly.Collector) {
 				Np:          el.ChildText("td:nth-child(22)"),
 			}
 
-			//player = types.Player{
-			//	PlayerBasicInfo: playerInfo,
-			//	Shooting:        shootingStats,
-			//}
 			player = types.NewPlayer(playerInfo)
 			player.AppendShooting(shootingStats)
 			players = append(players, *player)
@@ -59,6 +57,16 @@ func ScrapePlayers(url string, c *colly.Collector) {
 	})
 
 	// Shooting statistics
+	return nil
+}
+
+func ScrapePlayers(url string, c *colly.Collector) {
+	// TODO: getting the struct field infos from each respective table
+
+	err := getPlayersShootingStats(c)
+	if err != nil {
+		log.Fatal("Error getting players shooting statistics: ", err)
+	}
 
 	c.OnScraped(func(r *colly.Response) {
 		enc := json.NewEncoder(os.Stdout)
