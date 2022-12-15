@@ -89,7 +89,7 @@ type Player struct {
 	Nation string `json:"nation"`
 	Pos    string `json:"position"`
 	Age    string `json:"age"`
-	Min    string `json:"matches_played"`
+	Min    string `json:"minutes_played_per90"`
 
 	Shooting         ShootingStats         `json: "shooting_stats"`
 	Passing          PassingStats          `json:"passing_stats"`
