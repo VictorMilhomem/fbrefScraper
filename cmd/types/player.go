@@ -669,3 +669,15 @@ func (p *Player) AppendMisscellaneous(mis MiscellaneousStats) {
 func (p *Player) AppendPlayerSummary(ps PlayerSummaryStats) {
 	p.PlayerSummary = ps
 }
+
+type Players struct {
+	Team        string   `json:"team"`
+	PlayersList []Player `json:"players_stats"`
+}
+
+func NewPlayers(team string, pl []Player) *Players {
+	return &Players{
+		Team:        team,
+		PlayersList: pl,
+	}
+}

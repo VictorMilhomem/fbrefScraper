@@ -134,8 +134,8 @@ func getPlayersShootingStats(c *colly.Collector) {
 	// Shooting statistics
 }
 
-func writeFile(filename string) {
-	file, _ := json.MarshalIndent(players, "", " ")
+func writeFile(filename string, p types.Players) {
+	file, _ := json.MarshalIndent(p, "", " ")
 	_ = ioutil.WriteFile(filename, file, 0o644)
 	log.Println(colors.Green, "File ", colors.Cyan, filename, colors.Green, " created", colors.Reset)
 }
@@ -150,8 +150,10 @@ func ScrapePlayers(url string, c *colly.Collector) {
 	c.OnScraped(func(r *colly.Response) {
 		// enc := json.NewEncoder(&os.File{})
 		// enc.Encode(players)
+		// scrape team name
+		p := *types.NewPlayers("fluminense", players)
 		filename := "players_stats.json"
-		writeFile(filename)
+		writeFile(filename, p)
 	})
 
 	c.Visit(url)
