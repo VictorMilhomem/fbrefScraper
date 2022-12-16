@@ -6,7 +6,9 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"strings"
 	"time"
+	"unicode"
 
 	"github.com/VictorMilhomem/fbreScraper/cmd/colors"
 	"github.com/VictorMilhomem/fbreScraper/cmd/core"
@@ -44,17 +46,26 @@ func collyConfig(c *colly.Collector) {
 	})
 }
 
+func UpperCaseFirstChar(str string) string {
+	str = strings.ToLower(str)
+	for i, v := range str {
+		return string(unicode.ToUpper(v)) + str[i+1:]
+	}
+
+	return ""
+}
+
 func main() {
 	fmt.Println(colors.Cyan, "Welcome to fbref.com data scraper")
 
 	id := flag.String("id", "", "set a team id from fbref.com")
 	team := flag.String("t", "", "set an avaible team from fbref.com")
-	year := flag.String("y", "2022", "set the year from avaibles years at fbref.com")
+	year := flag.Int("y", 2022, "set the year from avaibles years at fbref.com")
 
 	flag.Parse()
 	var url types.Url
 	if *id != "" && *team != "" {
-		url = *types.NewUrlTeamStats(*id, *team, *year)
+		url = *types.NewUrlTeamStats(*id, UpperCaseFirstChar(*team), *year)
 	} else {
 		log.Fatal(colors.Red, "Unknown flag:", colors.Reset)
 	}
