@@ -339,11 +339,12 @@ func ScrapePlayers(url types.Url, c *colly.Collector) {
 	getPlayerSummary(c)
 
 	c.OnScraped(func(r *colly.Response) {
-		if err := os.Mkdir("output", os.ModePerm); err != nil {
+		dir := "output"
+		if err := os.Mkdir(dir, os.ModePerm); err != nil {
 			log.Fatal(err)
 		}
 		p := *types.NewPlayers(url.Team, players)
-		filename := "./output/" + url.Team + "_players_stats.json"
+		filename := "./" + dir + "/" + url.Team + "_players_stats.json"
 		writeFile(filename, p)
 	})
 
