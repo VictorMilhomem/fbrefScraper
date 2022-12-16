@@ -12,8 +12,6 @@ import (
 
 var players []types.Player
 
-// TODO: create functions to get all players statistics
-
 func getPlayerSummary(c *colly.Collector) {
 	var summary *types.PlayerSummaryStats
 	c.OnHTML("table#stats_player_summary > tbody", func(h *colly.HTMLElement) {
@@ -24,7 +22,9 @@ func getPlayerSummary(c *colly.Collector) {
 				el.ChildText("td:nth-child(15)"),
 				el.ChildText("td:nth-child(16)"),
 			)
-			players[i].PlayerSummary = *summary
+			if i < len(players) {
+				players[i].AppendPlayerSummary(*summary)
+			}
 		})
 	})
 }
@@ -84,7 +84,9 @@ func getPlayingTimeStats(c *colly.Collector) {
 				el.ChildText("td:nth-child(25)"),
 				el.ChildText("td:nth-child(26)"),
 			)
-			players[i].PlayingTime = *playingTime
+			if i < len(players) {
+				players[i].AppendPlayingTime(*playingTime)
+			}
 		})
 	})
 }
@@ -330,13 +332,11 @@ func ScrapePlayers(url string, c *colly.Collector) {
 	getGoalShotStats(c)
 	getDefensiveActionsStats(c)
 	getPossessionStats(c)
-	// getPlayingTimeStats(c)
+	getPlayingTimeStats(c)
 	getMiscellaneousStats(c)
 	getPlayerSummary(c)
 
 	c.OnScraped(func(r *colly.Response) {
-		// enc := json.NewEncoder(&os.File{})
-		// enc.Encode(players)
 		// scrape team name
 		p := *types.NewPlayers("fluminense", players)
 		filename := "players_stats.json"
