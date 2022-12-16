@@ -20,6 +20,46 @@ type ShootingStats struct {
 	Np          string `json:"np:G-xG"`
 }
 
+func NewShootingStats(
+	gls,
+	sht,
+	sot,
+	sot_per,
+	sht_ft,
+	sot_ft,
+	gls_shot,
+	gls_per_sot,
+	dist,
+	fk,
+	pk,
+	pkAtt,
+	xg,
+	npxg,
+	npxg_shot,
+	gls_xg,
+	np string,
+) *ShootingStats {
+	return &ShootingStats{
+		Gls:         gls,
+		Sht:         sht,
+		Sot:         sot,
+		Sot_per:     sot_per,
+		Sht_ft:      sht_ft,
+		Sot_ft:      sot_ft,
+		Gls_shot:    gls_shot,
+		Gls_per_sot: gls_per_sot,
+		Dist:        dist,
+		Fk:          fk,
+		Pk:          pk,
+		PkAtt:       pkAtt,
+		Xg:          xg,
+		Npxg:        npxg,
+		Npxg_shot:   npxg_shot,
+		Gls_xg:      gls_xg,
+		Np:          np,
+	}
+}
+
 type PassingStats struct {
 	PassesCompleted                  string `json:"passes_completed"`
 	PassesAttempted                  string `json:"passes_att"`
@@ -46,6 +86,58 @@ type PassingStats struct {
 	PrgPasses                        string `json:"progressive_passes"`
 }
 
+func NewPassingStats(
+	passesCompleted,
+	passesAttempted,
+	completionPercent,
+	totalDist,
+	prgDist,
+	shortPassesCompleted,
+	shortPassesAttempted,
+	shortPassesCmpPercent,
+	mediumPassesCompleted,
+	mediumPassesAttempted,
+	mediumPassesCmpPercent,
+	longPassesCompleted,
+	longPassesAttempted,
+	longPassesCmpPercent,
+	assists,
+	xAG,
+	xA,
+	assistsMinusXAG,
+	assistedShot,
+	completedPassesThatEnterOneThird,
+	completedPassesIntoTheBox,
+	completedCrossesIntoTheBox,
+	prgPasses string,
+) *PassingStats {
+	return &PassingStats{
+		PassesCompleted:                  passesCompleted,
+		PassesAttempted:                  passesAttempted,
+		CompletionPercent:                completionPercent,
+		TotalDist:                        totalDist,
+		PrgDist:                          prgDist,
+		ShortPassesCompleted:             shortPassesCompleted,
+		ShortPassesAttempted:             shortPassesAttempted,
+		ShortPassesCmpPercent:            shortPassesCmpPercent,
+		MediumPassesCompleted:            mediumPassesCompleted,
+		MediumPassesAttempted:            mediumPassesAttempted,
+		MediumPassesCmpPercent:           mediumPassesCmpPercent,
+		LongPassesCompleted:              longPassesCompleted,
+		LongPassesAttempted:              longPassesAttempted,
+		LongPassesCmpPercent:             longPassesCmpPercent,
+		Assists:                          assists,
+		XAG:                              xAG,
+		XA:                               xA,
+		AssistsMinusXAG:                  assistsMinusXAG,
+		AssistedShot:                     assistedShot,
+		CompletedPassesThatEnterOneThird: completedPassesThatEnterOneThird,
+		CompletedPassesIntoTheBox:        completedPassesIntoTheBox,
+		CompletedCrossesIntoTheBox:       completedCrossesIntoTheBox,
+		PrgPasses:                        prgPasses,
+	}
+}
+
 type PassTypesStats struct {
 	PassesAttempted                 string `json:"passes_att"`
 	LiveBallPasses                  string `json:"live_ball_passes"`
@@ -62,6 +154,42 @@ type PassTypesStats struct {
 	OutComesPassesCompleted         string `json:"outcomes_passes_completed"`
 	OffsidePasses                   string `json:"offiside_passes"`
 	PassesBlockedByOpp              string `json:"passes_blocked_by_opp"`
+}
+
+func NewPassTypes(
+	passesAttempted,
+	liveBallPasses,
+	deadBallPasses,
+	passesAttemptedFromFreeKicks,
+	completedPassesIntoOpenSpace,
+	passesThatTravelMoreThan40yards,
+	crosses,
+	throwInTaken,
+	cornerKicks,
+	inSwingingCornerKicks,
+	outSwingingCornerKicks,
+	straightCornerKicks,
+	outComesPassesCompleted,
+	offsidePasses,
+	passesBlockedByOpp string,
+) *PassTypesStats {
+	return &PassTypesStats{
+		PassesAttempted:                 passesAttempted,
+		LiveBallPasses:                  liveBallPasses,
+		DeadBallPasses:                  deadBallPasses,
+		PassesAttemptedFromFreeKicks:    passesAttemptedFromFreeKicks,
+		CompletedPassesIntoOpenSpace:    completedPassesIntoOpenSpace,
+		PassesThatTravelMoreThan40yards: passesThatTravelMoreThan40yards,
+		Crosses:                         crosses,
+		ThrowInTaken:                    throwInTaken,
+		CornerKicks:                     cornerKicks,
+		InSwingingCornerKicks:           inSwingingCornerKicks,
+		OutSwingingCornerKicks:          outSwingingCornerKicks,
+		StraightCornerKicks:             straightCornerKicks,
+		OutComesPassesCompleted:         outComesPassesCompleted,
+		OffsidePasses:                   offsidePasses,
+		PassesBlockedByOpp:              passesBlockedByOpp,
+	}
 }
 
 type GoalShotCreationStats struct {
@@ -83,6 +211,44 @@ type GoalShotCreationStats struct {
 	GCDefensiveActionsThatLeadToShot string `json:"gc_defensive_actions_that_lead_shot"`
 }
 
+func NewGoalShotCreation(
+	shotCreatingActions,
+	shotCreatingActionsPer90,
+	sCPassLiveBall,
+	sCPassDeadBall,
+	sCSuccessDribleLeadShot,
+	sCShotThatLeadAnotherShot,
+	sCFoulsDrawnThatLeadToShot,
+	sCDefensiveActionsThatLeadToShot,
+	goalCreationAction,
+	goalCreationActionPer90,
+	gCPassLiveBall,
+	gCPassDeadBall,
+	gCSuccessDribleLeadShot,
+	gCShotThatLeadAnotherShot,
+	gCFoulsDrawnThatLeadToShot,
+	gCDefensiveActionsThatLeadToShot string,
+) *GoalShotCreationStats {
+	return &GoalShotCreationStats{
+		ShotCreatingActions:              shotCreatingActions,
+		ShotCreatingActionsPer90:         shotCreatingActionsPer90,
+		SCPassLiveBall:                   sCPassLiveBall,
+		SCPassDeadBall:                   sCPassDeadBall,
+		SCSuccessDribleLeadShot:          sCSuccessDribleLeadShot,
+		SCShotThatLeadAnotherShot:        sCShotThatLeadAnotherShot,
+		SCFoulsDrawnThatLeadToShot:       sCFoulsDrawnThatLeadToShot,
+		SCDefensiveActionsThatLeadToShot: sCDefensiveActionsThatLeadToShot,
+		GoalCreationAction:               goalCreationAction,
+		GoalCreationActionPer90:          goalCreationActionPer90,
+		GCPassLiveBall:                   gCPassLiveBall,
+		GCPassDeadBall:                   gCPassDeadBall,
+		GCSuccessDribleLeadShot:          gCSuccessDribleLeadShot,
+		GCShotThatLeadAnotherShot:        gCShotThatLeadAnotherShot,
+		GCFoulsDrawnThatLeadToShot:       gCFoulsDrawnThatLeadToShot,
+		GCDefensiveActionsThatLeadToShot: gCDefensiveActionsThatLeadToShot,
+	}
+}
+
 type DefenseStats struct {
 	Tackles                   string `json:"tackles"`
 	TacklesWonPossession      string `json:"tackles_won_possesion"`
@@ -101,6 +267,42 @@ type DefenseStats struct {
 	ErrorLeadShot             string `json:"error_lead_shot"`
 }
 
+func NewDefenseStats(
+	tackles,
+	tacklesWonPossession,
+	tacklesDefensive3rd,
+	tacklesMid3rd,
+	tacklesAttacking3rd,
+	numberOfDribblersTackled,
+	numberOfTimesDribblerPast,
+	percentOfDribblersTackled,
+	blocks,
+	blockedShot,
+	blockkedPass,
+	interceptions,
+	tacklePlusInterception,
+	clearances,
+	errorLeadShot string,
+) *DefenseStats {
+	return &DefenseStats{
+		Tackles:                   tackles,
+		TacklesWonPossession:      tacklesWonPossession,
+		TacklesDefensive3rd:       tacklesDefensive3rd,
+		TacklesMid3rd:             tacklesMid3rd,
+		TacklesAttacking3rd:       tacklesAttacking3rd,
+		NumberOfDribblersTackled:  numberOfDribblersTackled,
+		NumberOfTimesDribblerPast: numberOfTimesDribblerPast,
+		PercentOfDribblersTackled: percentOfDribblersTackled,
+		Blocks:                    blocks,
+		BlockedShot:               blockedShot,
+		BlockkedPass:              blockkedPass,
+		Interceptions:             interceptions,
+		TacklePlusInterception:    tacklePlusInterception,
+		Clearances:                clearances,
+		ErrorLeadShot:             errorLeadShot,
+	}
+}
+
 type PossessionStats struct {
 	Touches                 string `json:"touches"`
 	TouchesDefBoxArea       string `json:"touches_def_box"`
@@ -116,6 +318,40 @@ type PossessionStats struct {
 	LooseBallAfterTackle    string `json:"loose_ball_after_tackled"`
 	ReceivedPass            string `json:"received_ball"`
 	PrgPassReceived         string `json:"progressive_pass_received"`
+}
+
+func NewPossessionStats(
+	touches,
+	touchesDefBoxArea,
+	touchesDef3rd,
+	touchesMid3rd,
+	touchesAttacking3rd,
+	touchesAttackingBoxArea,
+	liveBallTouches,
+	dribblesSucc,
+	dribblesAttempted,
+	dribblesSuccPercent,
+	failedGainBallControl,
+	looseBallAfterTackle,
+	receivedPass,
+	prgPassReceived string,
+) *PossessionStats {
+	return &PossessionStats{
+		Touches:                 touches,
+		TouchesDefBoxArea:       touchesDefBoxArea,
+		TouchesDef3rd:           touchesDef3rd,
+		TouchesMid3rd:           touchesMid3rd,
+		TouchesAttacking3rd:     touchesAttacking3rd,
+		TouchesAttackingBoxArea: touchesAttackingBoxArea,
+		LiveBallTouches:         liveBallTouches,
+		DribblesSucc:            dribblesSucc,
+		DribblesAttempted:       dribblesAttempted,
+		DribblesSuccPercent:     dribblesSuccPercent,
+		FailedGainBallControl:   failedGainBallControl,
+		LooseBallAfterTackle:    looseBallAfterTackle,
+		ReceivedPass:            receivedPass,
+		PrgPassReceived:         prgPassReceived,
+	}
 }
 
 type PlayingTimeStats struct {
@@ -141,6 +377,56 @@ type PlayingTimeStats struct {
 	OnGamexGMinusxGA        string `json:"onG_xG_minus_xGA"`
 	OnGamexGMinusxGA90      string `json:"onG_xG_minus_xGA_90"`
 	XGMinusxGANetPer90      string `json:"xG_minus_xGA_net_per90"`
+}
+
+func NewPlayingTimeStats(
+	playedMatches,
+	playedMin,
+	minuterPerMatches,
+	minPercent,
+	minutesDividedBy90,
+	matchesStarted,
+	minutesPerMatchStarted,
+	fullTimePlayed,
+	gamesAsSub,
+	minutesPerSubstitution,
+	unsedSub,
+	pointsPerMatch,
+	glsScoredByTeamOnGame,
+	glsAllowedByTeamOnGame,
+	glsScoredMinusAllowed,
+	glsScoredMinusAllowed90,
+	glsNetPer90,
+	onGamexG,
+	onGamexGA,
+	onGamexGMinusxGA,
+	onGamexGMinusxGA90,
+	xGMinusxGANetPer90 string,
+) *PlayingTimeStats {
+	return &PlayingTimeStats{
+		PlayedMatches:           playedMatches,
+		PlayedMin:               playedMin,
+		MinuterPerMatches:       minuterPerMatches,
+		MinPercent:              minPercent,
+		MinutesDividedBy90:      minutesDividedBy90,
+		MatchesStarted:          matchesStarted,
+		MinutesPerMatchStarted:  minutesPerMatchStarted,
+		FullTimePlayed:          fullTimePlayed,
+		GamesAsSub:              gamesAsSub,
+		MinutesPerSubstitution:  minutesPerSubstitution,
+		UnsedSub:                unsedSub,
+		PointsPerMatch:          pointsPerMatch,
+		GlsScoredByTeamOnGame:   glsScoredByTeamOnGame,
+		GlsAllowedByTeamOnGame:  glsAllowedByTeamOnGame,
+		GlsScoredMinusAllowed:   glsScoredMinusAllowed,
+		GlsScoredMinusAllowed90: glsScoredMinusAllowed90,
+		GlsNetPer90:             glsNetPer90,
+		OnGamexG:                onGamexG,
+		OnGamexGA:               onGamexGA,
+		OnGamexGMinusxGA:        onGamexGMinusxGA,
+		OnGamexGMinusxGA90:      onGamexGMinusxGA90,
+		XGMinusxGANetPer90:      xGMinusxGANetPer90,
+	}
 }
 
 type MiscellaneousStats struct {
@@ -239,6 +525,62 @@ type GoalKeepingStats struct {
 	NDefensiveActionsByKeeper     string `json:"n_defense_actions_by_keeper"`
 	NDefensiveActionsByKeeperFt   string `json:"n_defense_actions_by_keeper_ft"`
 	AverageDistance               string `json:"average_distance"`
+}
+
+func NewGoalKeepingStats(
+	goalAgainst,
+	penaltyKickAllowed,
+	freeKickAllowed,
+	cornerGoalsAgainst,
+	ownGoals,
+	postShotxG,
+	postShotxGSot,
+	postShotxGMinusGlsAllowed,
+	postShotxGMinusGlsAllowedFt,
+	launchedPassesCompletedLonger,
+	launchedPassesAttemptedLonger,
+	launchedPassesCompletedPer,
+	passesAttempted,
+	throwsAttempted,
+	launchPer,
+	averageLen,
+	gkAttempted,
+	gkLaunchPer,
+	gkAverageLen,
+	opponentAttemptedCrosses,
+	crossesStopedByKeeper,
+	crossesStopedByKeeperPer,
+	nDefensiveActionsByKeeper,
+	nDefensiveActionsByKeeperFt,
+	averageDistance string,
+) *GoalKeepingStats {
+	return &GoalKeepingStats{
+		GoalAgainst:                   goalAgainst,
+		PenaltyKickAllowed:            penaltyKickAllowed,
+		FreeKickAllowed:               freeKickAllowed,
+		CornerGoalsAgainst:            cornerGoalsAgainst,
+		OwnGoals:                      ownGoals,
+		PostShotxG:                    postShotxG,
+		PostShotxGSot:                 postShotxGSot,
+		PostShotxGMinusGlsAllowed:     postShotxGMinusGlsAllowed,
+		PostShotxGMinusGlsAllowedFt:   postShotxGMinusGlsAllowedFt,
+		LaunchedPassesCompletedLonger: launchedPassesCompletedLonger,
+		LaunchedPassesAttemptedLonger: launchedPassesAttemptedLonger,
+		LaunchedPassesCompletedPer:    launchedPassesCompletedPer,
+		PassesAttempted:               passesAttempted,
+		ThrowsAttempted:               throwsAttempted,
+		LaunchPer:                     launchPer,
+		AverageLen:                    averageLen,
+		GkAttempted:                   gkAttempted,
+		GkLaunchPer:                   gkLaunchPer,
+		GkAverageLen:                  gkAverageLen,
+		OpponentAttemptedCrosses:      opponentAttemptedCrosses,
+		CrossesStopedByKeeper:         crossesStopedByKeeper,
+		CrossesStopedByKeeperPer:      crossesStopedByKeeperPer,
+		NDefensiveActionsByKeeper:     nDefensiveActionsByKeeper,
+		NDefensiveActionsByKeeperFt:   nDefensiveActionsByKeeperFt,
+		AverageDistance:               averageDistance,
+	}
 }
 
 // TODO: maybe create a interface for a player, to solve the problem where i need to get the stats from diff tables
