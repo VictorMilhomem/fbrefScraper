@@ -434,6 +434,7 @@ type MiscellaneousStats struct {
 	RedCards              string `json:"red_cards"`
 	TwoYellowCards        string `json:"two_yellow_cards"`
 	Fouls                 string `json:"fouls"`
+	FoulsDrawn            string `json:"fouls_drawn"`
 	Offsides              string `json:"offside"`
 	Crosses               string `json:"crosses"`
 	Interceptions         string `json:"interceptions"`
@@ -452,6 +453,7 @@ func NewMiscellaneousStats(
 	redCards,
 	twoYellowCards,
 	fouls,
+	foulsDrawn,
 	offsides,
 	crosses,
 	interceptions,
@@ -469,6 +471,7 @@ func NewMiscellaneousStats(
 		RedCards:              redCards,
 		TwoYellowCards:        twoYellowCards,
 		Fouls:                 fouls,
+		FoulsDrawn:            foulsDrawn,
 		Offsides:              offsides,
 		Crosses:               crosses,
 		Interceptions:         interceptions,
