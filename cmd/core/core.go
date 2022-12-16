@@ -12,6 +12,7 @@ import (
 
 var players []types.Player
 
+// TODO: getPlayerSummary current not working
 func getPlayerSummary(c *colly.Collector) {
 	var summary *types.PlayerSummaryStats
 	c.OnHTML("table#stats_player_summary > tbody", func(h *colly.HTMLElement) {
