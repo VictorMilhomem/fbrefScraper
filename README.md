@@ -7,9 +7,8 @@ a json file.
 
 # TODO
 - [X] Players and statistics structures
-</br>
-- [] Commandline tool
-</br>
-- [] Teams and statistics structures
+- [ ] Commandline tool
+- [ ] Teams statistics
+- [ ] Competition statistics
 
 
