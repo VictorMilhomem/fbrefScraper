@@ -118,7 +118,30 @@ type PossessionStats struct {
 	PrgPassReceived         string `json:"progressive_pass_received"`
 }
 
-type PlayingTimeStats struct{}
+type PlayingTimeStats struct {
+	PlayedMatches           string `json:"matches_played"`
+	PlayedMin               string `json:"minutes_played"`
+	MinuterPerMatches       string `json:"minutes_per_matches"`
+	MinPercent              string `json:"minutes_percent"`
+	MinutesDividedBy90      string `json:"minutes_div_90"`
+	MatchesStarted          string `json:"matches_started"`
+	MinutesPerMatchStarted  string `json:"minutes_per_match_started"`
+	FullTimePlayed          string `json:"fulltime_matches"`
+	GamesAsSub              string `json:"games_as_sub"`
+	MinutesPerSubstitution  string `json:"minutes_per_sub"`
+	UnsedSub                string `json:"matches_as_unsed_sub"`
+	PointsPerMatch          string `json:"onG_points_per_match"`
+	GlsScoredByTeamOnGame   string `json:"onG_goals"`
+	GlsAllowedByTeamOnGame  string `json:"onG_goals_allowed"`
+	GlsScoredMinusAllowed   string `json:"goals_scored_minus_allowed"`
+	GlsScoredMinusAllowed90 string `json:"goals_scored_minus_allowed_90"`
+	GlsNetPer90             string `json:"goals_net_per90"`
+	OnGamexG                string `json:"onG_xG"`
+	OnGamexGA               string `json:"onG_xGa"`
+	OnGamexGMinusxGA        string `json:"onG_xG_minus_xGA"`
+	OnGamexGMinusxGA90      string `json:"onG_xG_minus_xGA_90"`
+	XGMinusxGANetPer90      string `json:"xG_minus_xGA_net_per90"`
+}
 
 type MiscellaneousStats struct {
 	YellowCards           string `json:"yellow_cards"`
