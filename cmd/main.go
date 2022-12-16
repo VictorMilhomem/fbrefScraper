@@ -58,8 +58,8 @@ func UpperCaseFirstChar(str string) string {
 func main() {
 	fmt.Println(colors.Cyan, "Welcome to fbref.com data scraper")
 
-	id := flag.String("id", "", "set a team id from fbref.com")
-	team := flag.String("t", "", "set an avaible team from fbref.com")
+	id := flag.String("id", "", "set a team id at fbref.com")
+	team := flag.String("t", "", "set an avaible team at fbref.com")
 	year := flag.Int("y", 2022, "set the year from avaibles years at fbref.com")
 
 	flag.Parse()
