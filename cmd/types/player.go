@@ -583,8 +583,6 @@ func NewGoalKeepingStats(
 	}
 }
 
-// TODO: maybe create a interface for a player, to solve the problem where i need to get the stats from diff tables
-// TODO: create a struct to handle all players statistics
 type PlayerBasic struct {
 	Name   string
 	Nation string
