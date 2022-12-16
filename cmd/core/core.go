@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
+	"os"
 
 	"github.com/VictorMilhomem/fbreScraper/cmd/colors"
 	"github.com/VictorMilhomem/fbreScraper/cmd/types"
@@ -338,9 +339,11 @@ func ScrapePlayers(url types.Url, c *colly.Collector) {
 	getPlayerSummary(c)
 
 	c.OnScraped(func(r *colly.Response) {
-		// scrape team name
+		if err := os.Mkdir("output", os.ModePerm); err != nil {
+			log.Fatal(err)
+		}
 		p := *types.NewPlayers(url.Team, players)
-		filename := url.Team + "_players_stats.json"
+		filename := "./output/" + url.Team + "_players_stats.json"
 		writeFile(filename, p)
 	})
 
