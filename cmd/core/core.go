@@ -2,8 +2,7 @@ package core
 
 import (
 	"encoding/json"
-	"log"
-	"os"
+	"io/ioutil"
 
 	"github.com/VictorMilhomem/fbreScraper/cmd/types"
 	"github.com/gocolly/colly"
@@ -13,7 +12,43 @@ var players []types.Player
 
 // TODO: create functions to get all players statistics
 
-func getGkAdvancedStats(c *colly.Collector) error {
+func getPassingStats(c *colly.Collector) {
+	var passing types.PassingStats
+
+	c.OnHTML("table#stats_passing_combined > tbody", func(h *colly.HTMLElement) {
+		h.ForEach("tr", func(i int, el *colly.HTMLElement) {
+			passing = types.PassingStats{
+				PassesCompleted:                  el.ChildText("td:nth-child(6)"),
+				PassesAttempted:                  el.ChildText("td:nth-child(7)"),
+				CompletionPercent:                el.ChildText("td:nth-child(8)"),
+				TotalDist:                        el.ChildText("td:nth-child(9)"),
+				PrgDist:                          el.ChildText("td:nth-child(10)"),
+				ShortPassesCompleted:             el.ChildText("td:nth-child(11)"),
+				ShortPassesAttempted:             el.ChildText("td:nth-child(12)"),
+				ShortPassesCmpPercent:            el.ChildText("td:nth-child(13)"),
+				MediumPassesCompleted:            el.ChildText("td:nth-child(14)"),
+				MediumPassesAttempted:            el.ChildText("td:nth-child(15)"),
+				MediumPassesCmpPercent:           el.ChildText("td:nth-child(16)"),
+				LongPassesCompleted:              el.ChildText("td:nth-child(17)"),
+				LongPassesAttempted:              el.ChildText("td:nth-child(18)"),
+				LongPassesCmpPercent:             el.ChildText("td:nth-child(19)"),
+				Assists:                          el.ChildText("td:nth-child(20)"),
+				XAG:                              el.ChildText("td:nth-child(21)"),
+				XA:                               el.ChildText("td:nth-child(22)"),
+				AssistsMinusXAG:                  el.ChildText("td:nth-child(23)"),
+				AssistedShot:                     el.ChildText("td:nth-child(24)"),
+				CompletedPassesThatEnterOneThird: el.ChildText("td:nth-child(25)"),
+				CompletedPassesIntoTheBox:        el.ChildText("td:nth-child(26)"),
+				CompletedCrossesIntoTheBox:       el.ChildText("td:nth-child(27)"),
+				PrgPasses:                        el.ChildText("td:nth-child(28)"),
+			}
+
+			players[i].Passing = passing
+		})
+	})
+}
+
+func getGkAdvancedStats(c *colly.Collector) {
 	var gkStats types.GoalKeepingStats
 
 	c.OnHTML("table#stats_keeper_adv_combined > tbody", func(h *colly.HTMLElement) {
@@ -59,11 +94,9 @@ func getGkAdvancedStats(c *colly.Collector) error {
 			players[i].Goalkeeping = gkStats
 		})
 	})
-
-	return nil
 }
 
-func getPlayersShootingStats(c *colly.Collector) error {
+func getPlayersShootingStats(c *colly.Collector) {
 	var (
 		playerInfo    types.PlayerBasic
 		shootingStats types.ShootingStats
@@ -107,25 +140,20 @@ func getPlayersShootingStats(c *colly.Collector) error {
 	})
 
 	// Shooting statistics
-	return nil
-}
-
-func checkError(err error) {
-	if err != nil {
-		log.Fatal("Error getting players statistics: ", err)
-	}
 }
 
 func ScrapePlayers(url string, c *colly.Collector) {
 	// TODO: getting the struct field infos from each respective table
 
-	err := getPlayersShootingStats(c)
-	checkError(err)
-	err = getGkAdvancedStats(c)
+	getPlayersShootingStats(c)
+	getPassingStats(c)
+	getGkAdvancedStats(c)
 
 	c.OnScraped(func(r *colly.Response) {
-		enc := json.NewEncoder(os.Stdout)
-		enc.Encode(players)
+		// enc := json.NewEncoder(&os.File{})
+		// enc.Encode(players)
+		file, _ := json.MarshalIndent(players, "", " ")
+		_ = ioutil.WriteFile("players_stats.json", file, 0o644)
 	})
 
 	c.Visit(url)

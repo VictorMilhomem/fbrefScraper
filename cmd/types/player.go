@@ -20,7 +20,39 @@ type ShootingStats struct {
 	Np          string `json:"np:G-xG"`
 }
 
-type PassingStats struct{}
+type PassingStats struct {
+	// Total
+	PassesCompleted   string `json:"passes_completed"`
+	PassesAttempted   string `json:"passes_att"`
+	CompletionPercent string `json:"passes_cmp_percent"`
+	TotalDist         string `json:"passes_total_dist"`
+	PrgDist           string `json:"progressive_dist"`
+
+	// Short
+	ShortPassesCompleted  string `json:"short_passes_cmp"`
+	ShortPassesAttempted  string `json:"short_passes_att"`
+	ShortPassesCmpPercent string `json:"short_passes_cmp_percent"`
+
+	// Medium
+	MediumPassesCompleted  string `json:"medium_passes_cmp"`
+	MediumPassesAttempted  string `json:"medium_passes_att"`
+	MediumPassesCmpPercent string `json:"medium_passes_cmp_percent"`
+
+	// Long
+	LongPassesCompleted  string `json:"Long_passes_cmp"`
+	LongPassesAttempted  string `json:"Long_passes_att"`
+	LongPassesCmpPercent string `json:"Longm_passes_cmp_percent"`
+
+	Assists                          string `json:"assists"`
+	XAG                              string `json:"xAG"`
+	XA                               string `json:"xA"`
+	AssistsMinusXAG                  string `json:"A-xAG"`
+	AssistedShot                     string `json:"assisted_shot"`
+	CompletedPassesThatEnterOneThird string `json:"cmp_passes_1/3"`
+	CompletedPassesIntoTheBox        string `json:"ppa"`
+	CompletedCrossesIntoTheBox       string `json:"crs_pa"`
+	PrgPasses                        string `json:"progressive_passes"`
+}
 
 type PassTypesStats struct{}
 
