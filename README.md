@@ -9,7 +9,9 @@ a json file.
 For building this tool you'll need to have [Go](https://go.dev/) installed in your machine.
 Recomended: [latest version](https://go.dev/dl/) (development version: go1.19.4)
 ```
-go build main.go
+cd fbrefScraper/
+cd cmd/
+go build
 ```
 
 # Run
@@ -20,9 +22,9 @@ First option (this option don't need building the Cli app):
 
 Second option (build):
     (Windows)
-    ./main.exe <options>
+    ./cmd.exe <options>
     (Linux)
-    ./main <options>
+    ./cmd <options>
 ```
 
 # Usage
