@@ -591,6 +591,16 @@ type PlayerBasic struct {
 	Min    string
 }
 
+func NewPlayerBasic(name, nation, pos, age, min string) *PlayerBasic {
+	return &PlayerBasic{
+		Name:   name,
+		Nation: nation,
+		Pos:    pos,
+		Age:    age,
+		Min:    min,
+	}
+}
+
 type Player struct {
 	Name   string `json:"name"`
 	Nation string `json:"nation"`
