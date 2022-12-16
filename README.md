@@ -6,10 +6,10 @@ a json file.
 
 
 # TODO
-[X] Players and statistics structures
+- [X] Players and statistics structures
 </br>
-[ ] Commandline tool
+- [] Commandline tool
 </br>
-[ ] Teams and statistics structures
+- [] Teams and statistics structures
 
 
