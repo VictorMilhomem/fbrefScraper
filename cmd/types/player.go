@@ -54,9 +54,45 @@ type PassingStats struct {
 	PrgPasses                        string `json:"progressive_passes"`
 }
 
-type PassTypesStats struct{}
+type PassTypesStats struct {
+	PassesAttempted                 string `json:"passes_att"`
+	LiveBallPasses                  string `json:"live_ball_passes"`
+	DeadBallPasses                  string `json:"dead_ball_passes"`
+	PassesAttemptedFromFreeKicks    string `json:"passes_att_fk"`
+	CompletedPassesIntoOpenSpace    string `json:"passes_completed_tb"`
+	PassesThatTravelMoreThan40yards string `json:"passes_that_travel_40yards+"`
+	Crosses                         string `json:"crosses"`
+	ThrowInTaken                    string `json:"throw_in"`
+	CornerKicks                     string `json:"corner_kicks"`
+	InSwingingCornerKicks           string `json:"inswinging_ck"`
+	OutSwingingCornerKicks          string `json:"outswinging_ck"`
+	StraightCornerKicks             string `json:"straitght_ck"`
+	OutComesPassesCompleted         string `json:"outcomes_passes_completed"`
+	OffsidePasses                   string `json:"offiside_passes"`
+	PassesBlockedByOpp              string `json:"passes_blocked_by_opp"`
+}
 
-type GoalShotCreationStats struct{}
+type GoalShotCreationStats struct {
+	ShotCreatingActions      string `json:"shot_creating_actions"`
+	ShotCreatingActionsPer90 string `json:"shot_creating_actions_per90"`
+
+	SCPassLiveBall                   string `json:"sc_pass_live_ball"`
+	SCPassDeadBall                   string `json:"sc_pass_dead_ball"`
+	SCSuccessDribleLeadShot          string `json:"sc_drible_lead_shot"`
+	SCShotThatLeadAnotherShot        string `json:"sc_shot_that_lead_another_shot"`
+	SCFoulsDrawnThatLeadToShot       string `json:"sc_fouls_drawn_that_lead_shot"`
+	SCDefensiveActionsThatLeadToShot string `json:"sc_defensive_actions_that_lead_shot"`
+
+	GoalCreationAction      string `json:"goal_creation_action"`
+	GoalCreationActionPer90 string `json:"goal_creation_action_per90"`
+
+	GCPassLiveBall                   string `json:"gc_pass_live_ball"`
+	GCPassDeadBall                   string `json:"gc_pass_dead_ball"`
+	GCSuccessDribleLeadShot          string `json:"gc_drible_lead_shot"`
+	GCShotThatLeadAnotherShot        string `json:"gc_shot_that_lead_another_shot"`
+	GCFoulsDrawnThatLeadToShot       string `json:"gc_fouls_drawn_that_lead_shot"`
+	GCDefensiveActionsThatLeadToShot string `json:"gc_defensive_actions_that_lead_shot"`
+}
 
 type DefenseStats struct{}
 
@@ -151,4 +187,16 @@ func (p *Player) AppendShooting(st ShootingStats) {
 
 func (p *Player) AppendGoalKeeping(gk GoalKeepingStats) {
 	p.Goalkeeping = gk
+}
+
+func (p *Player) AppendPassingStats(pss PassingStats) {
+	p.Passing = pss
+}
+
+func (p *Player) AppendPassTypes(pss PassTypesStats) {
+	p.PassType = pss
+}
+
+func (p *Player) AppendGoalCreation(gsa GoalShotCreationStats) {
+	p.GoalShotCreation = gsa
 }

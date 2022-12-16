@@ -3,7 +3,9 @@ package core
 import (
 	"encoding/json"
 	"io/ioutil"
+	"log"
 
+	"github.com/VictorMilhomem/fbreScraper/cmd/colors"
 	"github.com/VictorMilhomem/fbreScraper/cmd/types"
 	"github.com/gocolly/colly"
 )
@@ -43,7 +45,7 @@ func getPassingStats(c *colly.Collector) {
 				PrgPasses:                        el.ChildText("td:nth-child(28)"),
 			}
 
-			players[i].Passing = passing
+			players[i].AppendPassingStats(passing)
 		})
 	})
 }
@@ -54,44 +56,34 @@ func getGkAdvancedStats(c *colly.Collector) {
 	c.OnHTML("table#stats_keeper_adv_combined > tbody", func(h *colly.HTMLElement) {
 		h.ForEach("tr", func(i int, el *colly.HTMLElement) {
 			gkStats = types.GoalKeepingStats{
-				GoalAgainst:                 el.ChildText("td:nth-child(6)"),
-				PenaltyKickAllowed:          el.ChildText("td:nth-child(7)"),
-				FreeKickAllowed:             el.ChildText("td:nth-child(8)"),
-				CornerGoalsAgainst:          el.ChildText("td:nth-child(9)"),
-				OwnGoals:                    el.ChildText("td:nth-child(10)"),
-				PostShotxG:                  el.ChildText("td:nth-child(11)"),
-				PostShotxGSot:               el.ChildText("td:nth-child(12)"),
-				PostShotxGMinusGlsAllowed:   el.ChildText("td:nth-child(13)"),
-				PostShotxGMinusGlsAllowedFt: el.ChildText("td:nth-child(14)"),
-
-				// launched more than 40yards
+				GoalAgainst:                   el.ChildText("td:nth-child(6)"),
+				PenaltyKickAllowed:            el.ChildText("td:nth-child(7)"),
+				FreeKickAllowed:               el.ChildText("td:nth-child(8)"),
+				CornerGoalsAgainst:            el.ChildText("td:nth-child(9)"),
+				OwnGoals:                      el.ChildText("td:nth-child(10)"),
+				PostShotxG:                    el.ChildText("td:nth-child(11)"),
+				PostShotxGSot:                 el.ChildText("td:nth-child(12)"),
+				PostShotxGMinusGlsAllowed:     el.ChildText("td:nth-child(13)"),
+				PostShotxGMinusGlsAllowedFt:   el.ChildText("td:nth-child(14)"),
 				LaunchedPassesCompletedLonger: el.ChildText("td:nth-child(15)"),
 				LaunchedPassesAttemptedLonger: el.ChildText("td:nth-child(16)"),
 				LaunchedPassesCompletedPer:    el.ChildText("td:nth-child(17)"),
-
-				// passes not including goal kick
-				PassesAttempted: el.ChildText("td:nth-child(18)"),
-				ThrowsAttempted: el.ChildText("td:nth-child(19)"),
-				LaunchPer:       el.ChildText("td:nth-child(20)"),
-				AverageLen:      el.ChildText("td:nth-child(21)"),
-
-				// goal kicks
-				GkAttempted:  el.ChildText("td:nth-child(22)"),
-				GkLaunchPer:  el.ChildText("td:nth-child(23)"),
-				GkAverageLen: el.ChildText("td:nth-child(24)"),
-
-				// Crosses
-				OpponentAttemptedCrosses: el.ChildText("td:nth-child(25)"),
-				CrossesStopedByKeeper:    el.ChildText("td:nth-child(26)"),
-				CrossesStopedByKeeperPer: el.ChildText("td:nth-child(27)"),
-
-				// sweeper
-				NDefensiveActionsByKeeper:   el.ChildText("td:nth-child(28)"),
-				NDefensiveActionsByKeeperFt: el.ChildText("td:nth-child(29)"),
-				AverageDistance:             el.ChildText("td:nth-child(30)"),
+				PassesAttempted:               el.ChildText("td:nth-child(18)"),
+				ThrowsAttempted:               el.ChildText("td:nth-child(19)"),
+				LaunchPer:                     el.ChildText("td:nth-child(20)"),
+				AverageLen:                    el.ChildText("td:nth-child(21)"),
+				GkAttempted:                   el.ChildText("td:nth-child(22)"),
+				GkLaunchPer:                   el.ChildText("td:nth-child(23)"),
+				GkAverageLen:                  el.ChildText("td:nth-child(24)"),
+				OpponentAttemptedCrosses:      el.ChildText("td:nth-child(25)"),
+				CrossesStopedByKeeper:         el.ChildText("td:nth-child(26)"),
+				CrossesStopedByKeeperPer:      el.ChildText("td:nth-child(27)"),
+				NDefensiveActionsByKeeper:     el.ChildText("td:nth-child(28)"),
+				NDefensiveActionsByKeeperFt:   el.ChildText("td:nth-child(29)"),
+				AverageDistance:               el.ChildText("td:nth-child(30)"),
 			}
 
-			players[i].Goalkeeping = gkStats
+			players[i].AppendGoalKeeping(gkStats)
 		})
 	})
 }
@@ -142,6 +134,12 @@ func getPlayersShootingStats(c *colly.Collector) {
 	// Shooting statistics
 }
 
+func writeFile(filename string) {
+	file, _ := json.MarshalIndent(players, "", " ")
+	_ = ioutil.WriteFile(filename, file, 0o644)
+	log.Println(colors.Green, "File ", colors.Cyan, filename, colors.Green, " created", colors.Reset)
+}
+
 func ScrapePlayers(url string, c *colly.Collector) {
 	// TODO: getting the struct field infos from each respective table
 
@@ -152,8 +150,8 @@ func ScrapePlayers(url string, c *colly.Collector) {
 	c.OnScraped(func(r *colly.Response) {
 		// enc := json.NewEncoder(&os.File{})
 		// enc.Encode(players)
-		file, _ := json.MarshalIndent(players, "", " ")
-		_ = ioutil.WriteFile("players_stats.json", file, 0o644)
+		filename := "players_stats.json"
+		writeFile(filename)
 	})
 
 	c.Visit(url)
