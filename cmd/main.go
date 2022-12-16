@@ -1,6 +1,8 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"log"
 	"net"
 	"net/http"
@@ -8,6 +10,7 @@ import (
 
 	"github.com/VictorMilhomem/fbreScraper/cmd/colors"
 	"github.com/VictorMilhomem/fbreScraper/cmd/core"
+	"github.com/VictorMilhomem/fbreScraper/cmd/types"
 	"github.com/gocolly/colly"
 )
 
@@ -42,7 +45,21 @@ func collyConfig(c *colly.Collector) {
 }
 
 func main() {
-	url := "https://fbref.com/en/squads/84d9701c/2022/all_comps/Fluminense-Stats-All-Competitions"
+	fmt.Println(colors.Cyan, "Welcome to fbref.com data scraper")
+
+	id := flag.String("id", "", "set a team id from fbref.com")
+	team := flag.String("t", "", "set an avaible team from fbref.com")
+	year := flag.String("y", "2022", "set the year from avaibles years at fbref.com")
+
+	flag.Parse()
+	var url types.Url
+	if *id != "" && *team != "" {
+		url = *types.NewUrlTeamStats(*id, *team, *year)
+	} else {
+		log.Fatal(colors.Red, "Unknown flag:", colors.Reset)
+	}
+
+	// url := "https://fbref.com/en/squads/84d9701c/2022/all_comps/Fluminense-Stats-All-Competitions"
 	c := colly.NewCollector(
 		colly.AllowedDomains("fbref.com"),
 	)

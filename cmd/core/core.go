@@ -323,7 +323,7 @@ func writeFile(filename string, p types.Players) {
 	log.Println(colors.Green, "File ", colors.Cyan, filename, colors.Green, " created", colors.Reset)
 }
 
-func ScrapePlayers(url string, c *colly.Collector) {
+func ScrapePlayers(url types.Url, c *colly.Collector) {
 	// TODO: getting the struct field infos from each respective table
 
 	getPlayersShootingStats(c)
@@ -339,10 +339,10 @@ func ScrapePlayers(url string, c *colly.Collector) {
 
 	c.OnScraped(func(r *colly.Response) {
 		// scrape team name
-		p := *types.NewPlayers("fluminense", players)
-		filename := "players_stats.json"
+		p := *types.NewPlayers(url.Team, players)
+		filename := url.Team + "_players_stats.json"
 		writeFile(filename, p)
 	})
 
-	c.Visit(url)
+	c.Visit(url.Value)
 }
