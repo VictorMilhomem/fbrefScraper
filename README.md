@@ -11,7 +11,7 @@ Recomended: [latest version](https://go.dev/dl/) (development version: go1.19.4)
 ```
 cd fbrefScraper/
 cd cmd/
-go build
+go build -o fbref
 ```
 
 # Run
@@ -22,9 +22,9 @@ First option (this option don't need building the Cli app):
 
 Second option (build):
     (Windows)
-    ./cmd.exe <options>
+    ./fbref.exe <options>
     (Linux)
-    ./cmd <options>
+    ./fbref <options>
 ```
 
 # Usage
