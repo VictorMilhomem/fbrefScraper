@@ -1,21 +1,21 @@
 package types
 
 type ShootingStats struct {
-	Gls         string `json:"gols"`
-	Sht         string `json:"total_shots"`
-	Sot         string `json:"shots_on_target"`
-	Sot_per     string `json:"shots_on_target_per"`
-	Sht_ft      string `json:"shots_fulltime"`
-	Sot_ft      string `json:"shots_on_target_fulltime"`
-	Gls_shot    string `json:"gols_per_shot"`
-	Gls_per_sot string `json:"gols_per_SoT"`
-	Dist        string `json:"distance"`
-	Fk          string `json:"free_kick"`
-	Pk          string `json:"penalty_kick"`
-	PkAtt       string `json:"penalty_kick_attempted"`
+	Gls         string `json:"Gls"`
+	Sht         string `json:"Sh"`
+	Sot         string `json:"SoT"`
+	Sot_per     string `json:"SoT%"`
+	Sht_ft      string `json:"Sh/90"`
+	Sot_ft      string `json:"SoT/90"`
+	Gls_shot    string `json:"G/Sh"`
+	Gls_per_sot string `json:"G/SoT"`
+	Dist        string `json:"Dist"`
+	Fk          string `json:"FK"`
+	Pk          string `json:"PK"`
+	PkAtt       string `json:"PKatt"`
 	Xg          string `json:"xG"`
 	Npxg        string `json:"npxG"`
-	Npxg_shot   string `json:"npxG_shot"`
+	Npxg_shot   string `json:"npxG/Sh"`
 	Gls_xg      string `json:"G-xG"`
 	Np          string `json:"np:G-xG"`
 }
@@ -61,29 +61,29 @@ func NewShootingStats(
 }
 
 type PassingStats struct {
-	PassesCompleted                  string `json:"passes_completed"`
-	PassesAttempted                  string `json:"passes_att"`
-	CompletionPercent                string `json:"passes_cmp_percent"`
-	TotalDist                        string `json:"passes_total_dist"`
-	PrgDist                          string `json:"progressive_dist"`
-	ShortPassesCompleted             string `json:"short_passes_cmp"`
-	ShortPassesAttempted             string `json:"short_passes_att"`
-	ShortPassesCmpPercent            string `json:"short_passes_cmp_percent"`
-	MediumPassesCompleted            string `json:"medium_passes_cmp"`
-	MediumPassesAttempted            string `json:"medium_passes_att"`
-	MediumPassesCmpPercent           string `json:"medium_passes_cmp_percent"`
-	LongPassesCompleted              string `json:"Long_passes_cmp"`
-	LongPassesAttempted              string `json:"Long_passes_att"`
-	LongPassesCmpPercent             string `json:"Longm_passes_cmp_percent"`
-	Assists                          string `json:"assists"`
+	PassesCompleted                  string `json:"Cmp"`
+	PassesAttempted                  string `json:"Att"`
+	CompletionPercent                string `json:"Cmp%"`
+	TotalDist                        string `json:"TotDist"`
+	PrgDist                          string `json:"PrgDist"`
+	ShortPassesCompleted             string `json:"Cmp_short"`
+	ShortPassesAttempted             string `json:"Att_short"`
+	ShortPassesCmpPercent            string `json:"Cmp%_short"`
+	MediumPassesCompleted            string `json:"Cmp_medium"`
+	MediumPassesAttempted            string `json:"Att_medium"`
+	MediumPassesCmpPercent           string `json:"Cmp%_medium"`
+	LongPassesCompleted              string `json:"Cmp_long"`
+	LongPassesAttempted              string `json:"Att_long"`
+	LongPassesCmpPercent             string `json:"Comp%_long"`
+	Assists                          string `json:"Ast"`
 	XAG                              string `json:"xAG"`
 	XA                               string `json:"xA"`
 	AssistsMinusXAG                  string `json:"A-xAG"`
-	AssistedShot                     string `json:"assisted_shot"`
-	CompletedPassesThatEnterOneThird string `json:"cmp_passes_1/3"`
-	CompletedPassesIntoTheBox        string `json:"ppa"`
-	CompletedCrossesIntoTheBox       string `json:"crs_pa"`
-	PrgPasses                        string `json:"progressive_passes"`
+	AssistedShot                     string `json:"KP"`
+	CompletedPassesThatEnterOneThird string `json:"1/3"`
+	CompletedPassesIntoTheBox        string `json:"PPA"`
+	CompletedCrossesIntoTheBox       string `json:"CrsPA"`
+	PrgPasses                        string `json:"Prog"`
 }
 
 func NewPassingStats(
@@ -139,21 +139,21 @@ func NewPassingStats(
 }
 
 type PassTypesStats struct {
-	PassesAttempted                 string `json:"passes_att"`
-	LiveBallPasses                  string `json:"live_ball_passes"`
-	DeadBallPasses                  string `json:"dead_ball_passes"`
-	PassesAttemptedFromFreeKicks    string `json:"passes_att_fk"`
-	CompletedPassesIntoOpenSpace    string `json:"passes_completed_tb"`
-	PassesThatTravelMoreThan40yards string `json:"passes_that_travel_40yards+"`
-	Crosses                         string `json:"crosses"`
-	ThrowInTaken                    string `json:"throw_in"`
-	CornerKicks                     string `json:"corner_kicks"`
-	InSwingingCornerKicks           string `json:"inswinging_ck"`
-	OutSwingingCornerKicks          string `json:"outswinging_ck"`
-	StraightCornerKicks             string `json:"straitght_ck"`
-	OutComesPassesCompleted         string `json:"outcomes_passes_completed"`
-	OffsidePasses                   string `json:"offiside_passes"`
-	PassesBlockedByOpp              string `json:"passes_blocked_by_opp"`
+	PassesAttempted                 string `json:"Att"`
+	LiveBallPasses                  string `json:"Live"`
+	DeadBallPasses                  string `json:"Dead"`
+	PassesAttemptedFromFreeKicks    string `json:"FK"`
+	CompletedPassesIntoOpenSpace    string `json:"TB"`
+	PassesThatTravelMoreThan40yards string `json:"Sw"`
+	Crosses                         string `json:"Crs"`
+	ThrowInTaken                    string `json:"TI"`
+	CornerKicks                     string `json:"CK"`
+	InSwingingCornerKicks           string `json:"In_ck"`
+	OutSwingingCornerKicks          string `json:"Out_ck"`
+	StraightCornerKicks             string `json:"Str_ck"`
+	OutComesPassesCompleted         string `json:"Cmp_outcome"`
+	OffsidePasses                   string `json:"Off_outcome"`
+	PassesBlockedByOpp              string `json:"Blocks_outcome"`
 }
 
 func NewPassTypes(
@@ -193,22 +193,22 @@ func NewPassTypes(
 }
 
 type GoalShotCreationStats struct {
-	ShotCreatingActions              string `json:"shot_creating_actions"`
-	ShotCreatingActionsPer90         string `json:"shot_creating_actions_per90"`
-	SCPassLiveBall                   string `json:"sc_pass_live_ball"`
-	SCPassDeadBall                   string `json:"sc_pass_dead_ball"`
-	SCSuccessDribleLeadShot          string `json:"sc_drible_lead_shot"`
-	SCShotThatLeadAnotherShot        string `json:"sc_shot_that_lead_another_shot"`
-	SCFoulsDrawnThatLeadToShot       string `json:"sc_fouls_drawn_that_lead_shot"`
-	SCDefensiveActionsThatLeadToShot string `json:"sc_defensive_actions_that_lead_shot"`
-	GoalCreationAction               string `json:"goal_creation_action"`
-	GoalCreationActionPer90          string `json:"goal_creation_action_per90"`
-	GCPassLiveBall                   string `json:"gc_pass_live_ball"`
-	GCPassDeadBall                   string `json:"gc_pass_dead_ball"`
-	GCSuccessDribleLeadShot          string `json:"gc_drible_lead_shot"`
-	GCShotThatLeadAnotherShot        string `json:"gc_shot_that_lead_another_shot"`
-	GCFoulsDrawnThatLeadToShot       string `json:"gc_fouls_drawn_that_lead_shot"`
-	GCDefensiveActionsThatLeadToShot string `json:"gc_defensive_actions_that_lead_shot"`
+	ShotCreatingActions              string `json:"SCA"`
+	ShotCreatingActionsPer90         string `json:"SCA90"`
+	SCPassLiveBall                   string `json:"PassLive_sca"`
+	SCPassDeadBall                   string `json:"PassDead_sca"`
+	SCSuccessDribleLeadShot          string `json:"Drib_sca"`
+	SCShotThatLeadAnotherShot        string `json:"Sh_sca"`
+	SCFoulsDrawnThatLeadToShot       string `json:"Fld_sca"`
+	SCDefensiveActionsThatLeadToShot string `json:"Def_sca"`
+	GoalCreationAction               string `json:"GCA"`
+	GoalCreationActionPer90          string `json:"GCA90"`
+	GCPassLiveBall                   string `json:"PassLive_gca"`
+	GCPassDeadBall                   string `json:"PassDead_gca"`
+	GCSuccessDribleLeadShot          string `json:"Drib_gca"`
+	GCShotThatLeadAnotherShot        string `json:"Sh_gca"`
+	GCFoulsDrawnThatLeadToShot       string `json:"Fld_gca"`
+	GCDefensiveActionsThatLeadToShot string `json:"Def_gca"`
 }
 
 func NewGoalShotCreation(
@@ -250,21 +250,22 @@ func NewGoalShotCreation(
 }
 
 type DefenseStats struct {
-	Tackles                   string `json:"tackles"`
-	TacklesWonPossession      string `json:"tackles_won_possesion"`
-	TacklesDefensive3rd       string `json:"tackles_defensive_3rd"`
-	TacklesMid3rd             string `json:"tackles_mid_3rd"`
-	TacklesAttacking3rd       string `json:"tackles_attacking_3rd"`
-	NumberOfDribblersTackled  string `json:"n_dribblers_tackled"`
-	NumberOfTimesDribblerPast string `json:"n_dribblers_past"`
-	PercentOfDribblersTackled string `json:"percent_of_dribblers_tackled"`
-	Blocks                    string `json:"blocks"`
-	BlockedShot               string `json:"blocked_shot"`
-	BlockkedPass              string `json:"blocked_pass"`
-	Interceptions             string `json:"interception"`
-	TacklePlusInterception    string `json:"tackle_plus_interception"`
-	Clearances                string `json:"clearances"`
-	ErrorLeadShot             string `json:"error_lead_shot"`
+	Tackles                   string `json:"Tkl"`
+	TacklesWonPossession      string `json:"TklW"`
+	TacklesDefensive3rd       string `json:"Def3rd"`
+	TacklesMid3rd             string `json:"Mid3rd"`
+	TacklesAttacking3rd       string `json:"Att3rd"`
+	NumberOfDribblersTackled  string `json:"Tkl_vsDribbles"`
+	NumberOfTimesDribblerPast string `json:"Att_vsDribbles"`
+	PercentOfDribblersTackled string `json:"Tkl%_vsDribbles"`
+	Past                      string `json:"Past"`
+	Blocks                    string `json:"Blocks"`
+	BlockedShot               string `json:"Blocked_shot"`
+	BlockkedPass              string `json:"Blocked_pass"`
+	Interceptions             string `json:"Interception"`
+	TacklePlusInterception    string `json:"Tkl+Int"`
+	Clearances                string `json:"Clearances"`
+	ErrorLeadShot             string `json:"Err"`
 }
 
 func NewDefenseStats(
@@ -276,6 +277,7 @@ func NewDefenseStats(
 	numberOfDribblersTackled,
 	numberOfTimesDribblerPast,
 	percentOfDribblersTackled,
+	past,
 	blocks,
 	blockedShot,
 	blockkedPass,
@@ -293,6 +295,7 @@ func NewDefenseStats(
 		NumberOfDribblersTackled:  numberOfDribblersTackled,
 		NumberOfTimesDribblerPast: numberOfTimesDribblerPast,
 		PercentOfDribblersTackled: percentOfDribblersTackled,
+		Past:                      past,
 		Blocks:                    blocks,
 		BlockedShot:               blockedShot,
 		BlockkedPass:              blockkedPass,
@@ -304,20 +307,20 @@ func NewDefenseStats(
 }
 
 type PossessionStats struct {
-	Touches                 string `json:"touches"`
-	TouchesDefBoxArea       string `json:"touches_def_box"`
-	TouchesDef3rd           string `json:"touches_def_3rd"`
-	TouchesMid3rd           string `json:"touches_mid_3rd"`
-	TouchesAttacking3rd     string `json:"touches_attacking_3rd"`
-	TouchesAttackingBoxArea string `json:"touches_attacking_box"`
-	LiveBallTouches         string `json:"touches_live_ball"`
-	DribblesSucc            string `json:"success_dribbles"`
-	DribblesAttempted       string `json:"dribbles_attempted"`
-	DribblesSuccPercent     string `json:"dribbles_success_percent"`
-	FailedGainBallControl   string `json:"failed_gain_ball_control"`
-	LooseBallAfterTackle    string `json:"loose_ball_after_tackled"`
-	ReceivedPass            string `json:"received_ball"`
-	PrgPassReceived         string `json:"progressive_pass_received"`
+	Touches                 string `json:"Touches"`
+	TouchesDefBoxArea       string `json:"DefPen"`
+	TouchesDef3rd           string `json:"Def3rd"`
+	TouchesMid3rd           string `json:"Mid3rd"`
+	TouchesAttacking3rd     string `json:"Att3rd"`
+	TouchesAttackingBoxArea string `json:"AttPen"`
+	LiveBallTouches         string `json:"Live"`
+	DribblesSucc            string `json:"Succ_dribbles"`
+	DribblesAttempted       string `json:"Att_dribbles"`
+	DribblesSuccPercent     string `json:"Succ%_dribbles"`
+	FailedGainBallControl   string `json:"Mis_dribbles"`
+	LooseBallAfterTackle    string `json:"Dis_dribbles"`
+	ReceivedPass            string `json:"Rec"`
+	PrgPassReceived         string `json:"Prog"`
 }
 
 func NewPossessionStats(
@@ -355,28 +358,28 @@ func NewPossessionStats(
 }
 
 type PlayingTimeStats struct {
-	PlayedMatches           string `json:"matches_played"`
-	PlayedMin               string `json:"minutes_played"`
-	MinuterPerMatches       string `json:"minutes_per_matches"`
-	MinPercent              string `json:"minutes_percent"`
-	MinutesDividedBy90      string `json:"minutes_div_90"`
-	MatchesStarted          string `json:"matches_started"`
-	MinutesPerMatchStarted  string `json:"minutes_per_match_started"`
-	FullTimePlayed          string `json:"fulltime_matches"`
-	GamesAsSub              string `json:"games_as_sub"`
-	MinutesPerSubstitution  string `json:"minutes_per_sub"`
-	UnsedSub                string `json:"matches_as_unsed_sub"`
-	PointsPerMatch          string `json:"onG_points_per_match"`
-	GlsScoredByTeamOnGame   string `json:"onG_goals"`
-	GlsAllowedByTeamOnGame  string `json:"onG_goals_allowed"`
-	GlsScoredMinusAllowed   string `json:"goals_scored_minus_allowed"`
-	GlsScoredMinusAllowed90 string `json:"goals_scored_minus_allowed_90"`
-	GlsNetPer90             string `json:"goals_net_per90"`
-	OnGamexG                string `json:"onG_xG"`
-	OnGamexGA               string `json:"onG_xGa"`
-	OnGamexGMinusxGA        string `json:"onG_xG_minus_xGA"`
-	OnGamexGMinusxGA90      string `json:"onG_xG_minus_xGA_90"`
-	XGMinusxGANetPer90      string `json:"xG_minus_xGA_net_per90"`
+	PlayedMatches           string `json:"MP"`
+	PlayedMin               string `json:"Min"`
+	MinuterPerMatches       string `json:"Mn/MP"`
+	MinPercent              string `json:"Min%"`
+	MinutesDividedBy90      string `json:"90s"`
+	MatchesStarted          string `json:"Starts"`
+	MinutesPerMatchStarted  string `json:"Mn/Start"`
+	FullTimePlayed          string `json:"Compl"`
+	GamesAsSub              string `json:"Subs"`
+	MinutesPerSubstitution  string `json:"Mn/Sub"`
+	UnsedSub                string `json:"unSub"`
+	PointsPerMatch          string `json:"PPM"`
+	GlsScoredByTeamOnGame   string `json:"onG"`
+	GlsAllowedByTeamOnGame  string `json:"onGA"`
+	GlsScoredMinusAllowed   string `json:"+/-"`
+	GlsScoredMinusAllowed90 string `json:"+/-90"`
+	GlsNetPer90             string `json:"On-Off"`
+	OnGamexG                string `json:"onxG"`
+	OnGamexGA               string `json:"onxGA"`
+	OnGamexGMinusxGA        string `json:"xG+/-"`
+	OnGamexGMinusxGA90      string `json:"onxGA+/-90"`
+	XGMinusxGANetPer90      string `json:"On-Off_teamSuccess(xG)"`
 }
 
 func NewPlayingTimeStats(
@@ -430,22 +433,22 @@ func NewPlayingTimeStats(
 }
 
 type MiscellaneousStats struct {
-	YellowCards           string `json:"yellow_cards"`
-	RedCards              string `json:"red_cards"`
-	TwoYellowCards        string `json:"two_yellow_cards"`
-	Fouls                 string `json:"fouls"`
-	FoulsDrawn            string `json:"fouls_drawn"`
-	Offsides              string `json:"offside"`
-	Crosses               string `json:"crosses"`
-	Interceptions         string `json:"interceptions"`
-	TacklesWonPossesion   string `json:"tackles_won_possession"`
-	PenaltyKicksWon       string `json:"penalty_kicks_won"`
-	PenaltyKicksConceded  string `json:"penalty_kicks_conceded"`
-	OwnGoals              string `json:"own_goals"`
-	LooseBallRecovered    string `json:"loose_ball_recov"`
-	AerialDuelsWon        string `json:"aerial_duels_won"`
-	AerialDuelsLost       string `json:"aerial_duels_lost"`
-	AerialDuelsWonPercent string `json:"aerial_duels_won_percent"`
+	YellowCards           string `json:"CrdY"`
+	RedCards              string `json:"CrdR"`
+	TwoYellowCards        string `json:"2CrdY"`
+	Fouls                 string `json:"Fls"`
+	FoulsDrawn            string `json:"Fld"`
+	Offsides              string `json:"Off"`
+	Crosses               string `json:"Crs"`
+	Interceptions         string `json:"Interceptions"`
+	TacklesWonPossesion   string `json:"TklW"`
+	PenaltyKicksWon       string `json:"PKwon"`
+	PenaltyKicksConceded  string `json:"PKcon"`
+	OwnGoals              string `json:"OG"`
+	LooseBallRecovered    string `json:"Recov"`
+	AerialDuelsWon        string `json:"Won"`
+	AerialDuelsLost       string `json:"Lost"`
+	AerialDuelsWonPercent string `json:"Won%"`
 }
 
 func NewMiscellaneousStats(
@@ -503,31 +506,31 @@ func NewPlayerSummary(playedMatches, playedMin, gls, assists string) *PlayerSumm
 }
 
 type GoalKeepingStats struct {
-	GoalAgainst                   string `json:"goal_against"`
-	PenaltyKickAllowed            string `json:"pk_allowed"`
-	FreeKickAllowed               string `json:"fk_allowed"`
-	CornerGoalsAgainst            string `json:"ck_allowed"`
-	OwnGoals                      string `json:"own_goals"`
-	PostShotxG                    string `json:"ps_xG"`
-	PostShotxGSot                 string `json:"ps_xG_SoT"`
-	PostShotxGMinusGlsAllowed     string `json:"ps_xG_minus_gls_allowed"`
-	PostShotxGMinusGlsAllowedFt   string `json:"ps_xG_minus_gls_allowed_ft"`
-	LaunchedPassesCompletedLonger string `json:"passes_cmp_longer"`
-	LaunchedPassesAttemptedLonger string `json:"passes_att_longer"`
-	LaunchedPassesCompletedPer    string `json:"passes_cmp_per"`
-	PassesAttempted               string `json:"passes_att"`
-	ThrowsAttempted               string `json:"thr_att"`
-	LaunchPer                     string `json:"launch_per"`
-	AverageLen                    string `json:"avg_len"`
-	GkAttempted                   string `json:"gk_att"`
-	GkLaunchPer                   string `json:"gk_launch_per"`
-	GkAverageLen                  string `json:"gk_avg_len"`
-	OpponentAttemptedCrosses      string `json:"crosses_opp"`
-	CrossesStopedByKeeper         string `json:"crosses_stp_by_keeper"`
-	CrossesStopedByKeeperPer      string `json:"crosses_stp_by_keeper_per"`
-	NDefensiveActionsByKeeper     string `json:"n_defense_actions_by_keeper"`
-	NDefensiveActionsByKeeperFt   string `json:"n_defense_actions_by_keeper_ft"`
-	AverageDistance               string `json:"average_distance"`
+	GoalAgainst                   string `json:"GA"`
+	PenaltyKickAllowed            string `json:"PKA"`
+	FreeKickAllowed               string `json:"FK"`
+	CornerGoalsAgainst            string `json:"CK"`
+	OwnGoals                      string `json:"OG"`
+	PostShotxG                    string `json:"PSxG"`
+	PostShotxGSot                 string `json:"PSxG/SoT"`
+	PostShotxGMinusGlsAllowed     string `json:"PSxG+/-"`
+	PostShotxGMinusGlsAllowedFt   string `json:"/90"`
+	LaunchedPassesCompletedLonger string `json:"Cmp"`
+	LaunchedPassesAttemptedLonger string `json:"Att"`
+	LaunchedPassesCompletedPer    string `json:"Cmp%"`
+	PassesAttempted               string `json:"Att_passes"`
+	ThrowsAttempted               string `json:"Thr"`
+	LaunchPer                     string `json:"Launch%"`
+	AverageLen                    string `json:"AvgLen"`
+	GkAttempted                   string `json:"Att_gk"`
+	GkLaunchPer                   string `json:"Launch%_gk"`
+	GkAverageLen                  string `json:"AvgLen_gk"`
+	OpponentAttemptedCrosses      string `json:"Opp"`
+	CrossesStopedByKeeper         string `json:"Stp"`
+	CrossesStopedByKeeperPer      string `json:"Stp%"`
+	NDefensiveActionsByKeeper     string `json:"#OPA%"`
+	NDefensiveActionsByKeeperFt   string `json:"#OPA/90"`
+	AverageDistance               string `json:"AvgDist"`
 }
 
 func NewGoalKeepingStats(
@@ -605,11 +608,11 @@ func NewPlayerBasic(name, nation, pos, age, min string) *PlayerBasic {
 }
 
 type Player struct {
-	Name   string `json:"name"`
-	Nation string `json:"nation"`
-	Pos    string `json:"position"`
-	Age    string `json:"age"`
-	Min    string `json:"minutes_played_per90"`
+	Name   string `json:"Name"`
+	Nation string `json:"Nation"`
+	Pos    string `json:"Position"`
+	Age    string `json:"Age"`
+	Min    string `json:"Min/90"`
 
 	Shooting         ShootingStats         `json:"shooting_stats"`
 	Passing          PassingStats          `json:"passing_stats"`

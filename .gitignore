@@ -1,6 +1,4 @@
-./examples/
-.examples/
-.examples/*
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json

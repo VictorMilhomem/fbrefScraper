@@ -2,6 +2,7 @@ package core
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -138,6 +139,7 @@ func getDefensiveActionsStats(c *colly.Collector) {
 				el.ChildText("td:nth-child(18)"),
 				el.ChildText("td:nth-child(19)"),
 				el.ChildText("td:nth-child(20)"),
+				el.ChildText("td:nth-child(21)"),
 			)
 			players[i].AppendDefensiveActions(*defense)
 		})
@@ -341,7 +343,7 @@ func ScrapePlayers(url types.Url, c *colly.Collector) {
 	c.OnScraped(func(r *colly.Response) {
 		dir := "output"
 		if err := os.Mkdir(dir, os.ModePerm); err != nil {
-			log.Fatal(err)
+			fmt.Println("")
 		}
 		p := *types.NewPlayers(url.Team, players)
 		filename := "./" + dir + "/" + url.Team + "_players_stats.json"
