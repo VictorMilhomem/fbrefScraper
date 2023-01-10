@@ -10,6 +10,7 @@ import (
 	"time"
 	"unicode"
 
+	api "github.com/VictorMilhomem/fbreScraper/cmd/api/server"
 	"github.com/VictorMilhomem/fbreScraper/cmd/colors"
 	"github.com/VictorMilhomem/fbreScraper/cmd/core"
 	"github.com/VictorMilhomem/fbreScraper/cmd/types"
@@ -61,19 +62,24 @@ func main() {
 	id := flag.String("id", "", "set a team id at fbref.com")
 	team := flag.String("t", "", "set an avaible team at fbref.com")
 	year := flag.Int("y", 2022, "set the year from avaibles years at fbref.com")
+	serve := flag.Bool("s", false, "start server")
 
 	flag.Parse()
+
+	if *serve {
+		api.StartServer()
+	}
+
 	var url types.Url
 	if *id != "" && *team != "" {
 		url = *types.NewUrlTeamStats(*id, UpperCaseFirstChar(*team), *year)
+		// url := "https://fbref.com/en/squads/84d9701c/2022/all_comps/Fluminense-Stats-All-Competitions"
+		c := colly.NewCollector(
+			colly.AllowedDomains("fbref.com"),
+		)
+		collyConfig(c)
+		core.ScrapePlayers(url, c)
 	} else {
 		log.Fatal(colors.Red, "Unknown flag:", colors.Reset)
 	}
-
-	// url := "https://fbref.com/en/squads/84d9701c/2022/all_comps/Fluminense-Stats-All-Competitions"
-	c := colly.NewCollector(
-		colly.AllowedDomains("fbref.com"),
-	)
-	collyConfig(c)
-	core.ScrapePlayers(url, c)
 }
